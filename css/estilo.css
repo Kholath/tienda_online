@@ -1,0 +1,37 @@
+#logo{
+    grid-area: logo;
+    margin-left: 50px;
+}
+
+#eslogan{
+    grid-area: eslogan;
+    color: orange;
+    font-size: 3em;
+    font-family: cursive;
+    margin: auto;
+}
+
+#login{
+    grid-area: login;
+    margin: auto;
+}
+
+#user{
+    align-items: flex-end;
+}
+
+#user label{
+    color: white;
+    font-family: arial;
+}
+
+#pass label{
+    color: white;
+    font-family: arial;
+}
+
+header{
+    display: grid;
+    grid-template-areas: 'logo eslogan login';
+    background-color: black;
+}
