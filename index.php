@@ -27,7 +27,13 @@
         </form>
     </header>
     <main>
-        
+        <h1>¡Compra las novedades para todas las plataformas al mejor precio!</h1>
+        <div id="plataformas">
+            <img src="imagenes/nintendo.png">
+            <img src="imagenes/ps4.png">
+            <img src="imagenes/xbox.png">
+            <img src="imagenes/pc.png">
+        </div>
     </main>
 </body>
 </html>

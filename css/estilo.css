@@ -31,3 +31,11 @@ header{
     grid-template-areas: 'logo eslogan login';
     background-color: black;
 }
+
+main{
+    font-size: 5em; 
+}
+
+#plataformas img{
+    
+}
