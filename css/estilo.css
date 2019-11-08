@@ -16,10 +16,6 @@
     margin: auto;
 }
 
-#user{
-    align-items: flex-end;
-}
-
 #user label{
     color: white;
     font-family: arial;
