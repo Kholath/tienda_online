@@ -61,3 +61,8 @@ footer{
     color: white;
     text-align: center;
 }
+
+h1{
+    margin: 0px;
+    font-family: fantasy;
+}

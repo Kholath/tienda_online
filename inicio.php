@@ -1,3 +1,22 @@
+<?php
+
+$mensaje="";
+if (isset($_GET['mensaje'])){
+	$mensaje=strip_tags($_GET['mensaje']);
+}
+
+$usuario = "";
+if (isset($_GET['usuario'])){
+	$usuario=strip_tags(trim($_GET['usuario']));
+}
+
+$pass = "";
+if (isset($_GET['pass'])){
+	$pass=strip_tags(trim($_GET['pass']));
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="">
 <head>
@@ -15,14 +34,14 @@
         <div id="eslogan">
             <p>Lo último en el mundo de los videojuegos</p>
         </div>
-        <form id="login">
+        <form id="login" action="catalogo.php" method="post">
             <div id="user">
                 <label>Usuario: </label>
-                <input type="text" id="usuario">
+                <input type="text" id="usuario" name="usuario" value="<?=$usuario?>" />
             </div>
             <div id="pass">
                 <label>Contraseña: </label>
-                <input type="password" id="contrasenia">
+                <input type="password" id="contrasenia" name="pass" value="<?=$pass?>" />
             </div>
             <div id="entrar">
                 <input type="submit" value="Entrar" />

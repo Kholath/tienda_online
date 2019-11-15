@@ -11,9 +11,17 @@
     margin: auto;
 }
 
+#bienvenida{
+    color: white;
+    grid-area: bienvenida;
+    font-family: "Comic Sans";
+    font-size: 1.5em;
+    margin: auto;
+}
+
 header{
     display: grid;
-    grid-template-areas: 'logo eslogan eslogan';
+    grid-template-areas: 'logo eslogan bienvenida';
     background-color: black;
 }
 
@@ -64,5 +72,13 @@ footer{
     width: 100px;
     height: 25px;
     margin: auto;
+}
+
+#comprar{
+    background-color: orange;
+    border-radius: 15px;
+    border: 2px solid white;
+    font-size: 1.5em;
+    font-family: "Comic Sans";
 }
 
