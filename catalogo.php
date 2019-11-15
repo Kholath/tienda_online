@@ -69,17 +69,19 @@ if (!$datosCorrectos){
 			mysqli_stmt_execute($consulta);
 			mysqli_stmt_bind_result($consulta,$usuario);
 			
+			mysqli_stmt_store_result($consulta);
+			$n=mysqli_stmt_num_rows($consulta);
+
+			if ($n!=1){
+				header("Location:inicio.php?mensaje=".urlencode("Login incorrecto."));
+				exit;
+			}
+			mysqli_stmt_close($consulta);
+			mysqli_close($canal);
+			
 			?>
+			
 			¡Bienvenido de nuevo <?=$usuario?>!
-			<?php 
-				while (mysqli_stmt_fetch($consulta)){
-					if($usuario === null){
-						header("Location:inicio.php?mensaje=".urlencode("Login incorrecto."));
-					}
-				}
-				mysqli_stmt_close($consulta);
-				mysqli_close($canal); 
-			?>
 		</div>
     </header>
     <main>

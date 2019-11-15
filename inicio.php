@@ -35,6 +35,7 @@ if (isset($_GET['pass'])){
             <p>Lo último en el mundo de los videojuegos</p>
         </div>
         <form id="login" action="catalogo.php" method="post">
+			<div id="error"><?=$mensaje?></div>
             <div id="user">
                 <label>Usuario: </label>
                 <input type="text" id="usuario" name="usuario" value="<?=$usuario?>" />

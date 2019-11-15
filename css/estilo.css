@@ -16,6 +16,10 @@
     margin: auto;
 }
 
+#error{
+    color: red;
+}
+
 #user label{
     color: white;
     font-family: arial;
