@@ -24,6 +24,9 @@
                 <label>Contraseña: </label>
                 <input type="password" id="contrasenia">
             </div>
+            <div id="entrar">
+                <input type="submit" value="Entrar" />
+            </div>
         </form>
     </header>
     <main>
@@ -35,5 +38,9 @@
             <img src="imagenes/pc.png">
         </div>
     </main>
+    <footer>
+        <p>Daniel Crespo Martínez</p>
+        <p>Copyright © Todos los Derechos Reservados</p>
+    </footer>
 </body>
 </html>

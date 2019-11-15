@@ -1,0 +1,68 @@
+#logo{
+    grid-area: logo;
+    margin-left: 50px;
+}
+
+#eslogan{
+    grid-area: eslogan;
+    color: orange;
+    font-size: 3em;
+    font-family: cursive;
+    margin: auto;
+}
+
+header{
+    display: grid;
+    grid-template-areas: 'logo eslogan eslogan';
+    background-color: black;
+}
+
+main{
+    font-size: 1.5em;
+    font-family: Arial;
+    text-align: center;
+    margin: 0px;
+    display: grid;
+    grid-template-areas: 'blanco1 folleto blanco2';
+}
+
+#blanco1{
+    grid-area: blanco1;
+}
+
+#blanco2{
+    grid-area: blanco2;
+}
+
+footer{
+    background-color: darkred;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+}
+
+#folleto{
+    border: 2px dashed black;
+    background-color: orange;
+    grid-area: folleto;
+}
+
+.prod{
+    display: grid;
+    grid-template-areas: 'imagen cantidad';
+}
+
+.imagen{
+    width: 250px;
+    height: auto;
+    grid-area: imagen;
+    margin: 20px;
+}
+
+.cantidad{
+    grid-area: cantidad;
+    width: 100px;
+    height: 25px;
+    margin: auto;
+}
+
