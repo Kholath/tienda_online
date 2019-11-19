@@ -31,7 +31,7 @@ main{
     text-align: center;
     margin: 0px;
     display: grid;
-    grid-template-areas: 'blanco1 folleto blanco2';
+    grid-template-areas: 'blanco1 factura blanco2';
 }
 
 #blanco1{
@@ -42,49 +42,13 @@ main{
     grid-area: blanco2;
 }
 
+#factura{
+	grid-area: factura;
+}
+
 footer{
     background-color: darkred;
     border: 1px solid black;
     color: white;
     text-align: center;
 }
-
-#folleto{
-    border: 2px dashed black;
-    background-color: orange;
-    grid-area: folleto;
-}
-
-.prod{
-    display: grid;
-    grid-template-areas: 'imagen etiqueta cantidad';
-}
-
-.imagen{
-    width: 250px;
-    height: auto;
-    grid-area: imagen;
-    margin: 20px;
-}
-
-.etiqueta{
-    grid-area: etiqueta;
-    margin: auto;
-}
-
-.cantidad{
-    grid-area: cantidad;
-    width: 100px;
-    height: 25px;
-    margin: auto;
-}
-
-#comprar{
-    background-color: black;
-    color: white;
-    border-radius: 15px;
-    border: 2px solid white;
-    font-size: 1.5em;
-    font-family: "Comic Sans";
-}
-
