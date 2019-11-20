@@ -44,7 +44,7 @@ if (isset($_POST['j10'])){
 	$j10=strip_tags(trim($_POST['j10']));
 }
 
-$todo=array(j1,j2,j3,j4,j5,j6,j7,j8,j9,j10);
+$todo=array($j1,$j2,$j3,$j4,$j5,$j6,$j7,$j8,$j9,$j10);
 
 ?>
 
@@ -84,9 +84,9 @@ $todo=array(j1,j2,j3,j4,j5,j6,j7,j8,j9,j10);
 			}
 			mysqli_set_charset($canal,"utf8");
 			
-			//Consulta producto 1
-			for($i=1;i<=10;i++){
-				$consulta = "select cantidad, precio from productos where id=?";
+			//Consulta producto
+			for($i=1;$i<=10;$i++){
+				$sql="select cantidad, precio from productos where id=?";
 				$consulta=mysqli_prepare($canal,$sql);
 			
 				if (!$consulta){
@@ -94,21 +94,25 @@ $todo=array(j1,j2,j3,j4,j5,j6,j7,j8,j9,j10);
 					exit;
 				}
 				
-				mysqli_stmt_bind_param($consulta,"d",$ii);
-				$ii = $i;
+				mysqli_stmt_bind_param($consulta,"i",$juego);
+				$juego = $i;
 				mysqli_stmt_execute($consulta);
 				mysqli_stmt_bind_result($consulta,$cantidad,$precio);
+				mysqli_stmt_store_result($consulta);
 				
-				if($todo[i-1]>$cantidad){
+				mysqli_stmt_fetch($consulta);
+				
+				if($todo[$i-1]>$cantidad){
 					$http="Location: catalogo.php?mensaje=".urlencode("Productos fuera de stock");
 					$http.="&j".urlencode($i)."=".urlencode($cantidad);
 				}else{
-					
-					
+					echo $todo[$i-1]." x ".$precio." = ".$todo[$i-1]*$precio."<br>";
 				}
 				
+				mysqli_stmt_free_result($consulta);
+				unset($consulta);
+				
 			}
-			
 			?>
 		</div>
 		<div id="blanco2"></div>
