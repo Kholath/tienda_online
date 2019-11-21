@@ -17,6 +17,11 @@ if (empty($pass)){
 	$datosCorrectos=false;
 }
 
+$j1=0;
+if (isset($_POST['j1'])){
+	$j1=strip_tags(trim($_POST['j1']));
+}
+
 if (!$datosCorrectos){
 	$http="Location: inicio.php?mensaje=".urlencode("Se necesitan un usuario y contraseña válidos");
 	$http.="&usuario=".urlencode($usuario)."&pass=".urlencode($pass);
@@ -211,7 +216,7 @@ if (isset($_GET['j10Correcto'])){
         <div class="blanco">
 			<?=$mensaje?>
 		</div>
-        <form id="folleto" action="factura.php?usuario=<?=$usuario?>" method="post">
+        <form id="folleto" action="factura.php?usuario=<?=$usuario?>&pass=<?=$pass?>" method="post">
             <div class="prod">
                 <img src="imagenes/black.jpg" class="imagen">
 				<div class="etiqueta">Cantidad: </div>

@@ -1,6 +1,7 @@
 <?php
 
 $usuario = $_GET['usuario'];
+$pass = $_GET['pass'];
 
 $j1=0;
 $j2=0;
@@ -12,6 +13,17 @@ $j7=0;
 $j8=0;
 $j9=0;
 $j10=0;
+
+$j1Correcto="v";
+$j2Correcto="v";
+$j3Correcto="v";
+$j4Correcto="v";
+$j5Correcto="v";
+$j6Correcto="v";
+$j7Correcto="v";
+$j8Correcto="v";
+$j9Correcto="v";
+$j10Correcto="v";
 
 if (isset($_POST['j1'])){
 	$j1=strip_tags(trim($_POST['j1']));
@@ -45,6 +57,7 @@ if (isset($_POST['j10'])){
 }
 
 $todo=array($j1,$j2,$j3,$j4,$j5,$j6,$j7,$j8,$j9,$j10);
+$todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,$j6Correcto,$j7Correcto,$j8Correcto,$j9Correcto,$j10Correcto);
 
 ?>
 
@@ -66,7 +79,7 @@ $todo=array($j1,$j2,$j3,$j4,$j5,$j6,$j7,$j8,$j9,$j10);
             <p>Lo último en el mundo de los videojuegos</p>
         </div>
 		<div id="bienvenida">
-			¡Bienvenido de nuevo <?=$usuario?>!
+			¡Bienvenido de nuevo <?=$usuario?><?=$pass?>!
 		</div>
     </header>
 	<main>
@@ -85,6 +98,7 @@ $todo=array($j1,$j2,$j3,$j4,$j5,$j6,$j7,$j8,$j9,$j10);
 			mysqli_set_charset($canal,"utf8");
 			
 			//Consulta producto
+			$resultado=0;
 			for($i=1;$i<=10;$i++){
 				$sql="select cantidad, precio from productos where id=?";
 				$consulta=mysqli_prepare($canal,$sql);
@@ -103,16 +117,25 @@ $todo=array($j1,$j2,$j3,$j4,$j5,$j6,$j7,$j8,$j9,$j10);
 				mysqli_stmt_fetch($consulta);
 				
 				if($todo[$i-1]>$cantidad){
-					$http="Location: catalogo.php?mensaje=".urlencode("Productos fuera de stock");
+					$http="Location: inicio.php?mensaje=".urlencode("Productos fuera de stock");
 					$http.="&j".urlencode($i)."=".urlencode($cantidad);
+					$http.="&usuario=".urlencode($usuario)."&pass=".urlencode($pass);
+					$todoCorrecto[i-1]="f";
+					header($http);
+					exit;
 				}else{
-					echo $todo[$i-1]." x ".$precio." = ".$todo[$i-1]*$precio."<br>";
+					$individual=$todo[$i-1]*$precio;
+					$resultado+=$individual;
+					if($todo[$i-1]>0){
+						echo "Producto ".$i.": ".$todo[$i-1]." x ".$precio." = ".$individual."<br>";
+					}
 				}
 				
 				mysqli_stmt_free_result($consulta);
 				unset($consulta);
 				
 			}
+			echo "El coste total de la compra es: ".$resultado."€.";
 			?>
 		</div>
 		<div id="blanco2"></div>

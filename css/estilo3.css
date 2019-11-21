@@ -44,6 +44,7 @@ main{
 
 #factura{
 	grid-area: factura;
+	background-color: orange;
 }
 
 footer{
