@@ -5,6 +5,9 @@ $usuario="";
 if (isset($_POST['usuario'])){
 	$usuario=strip_tags(trim($_POST['usuario']));
 }
+if (isset($_GET['usuario'])){
+	$usuario=strip_tags(trim($_GET['usuario']));
+}
 if (empty($usuario)){
 	$datosCorrectos=false;
 }
@@ -13,13 +16,11 @@ $pass="";
 if (isset($_POST['pass'])){
 	$pass=strip_tags(trim($_POST['pass']));
 }
+if (isset($_GET['pass'])){
+	$pass=strip_tags(trim($_GET['pass']));
+}
 if (empty($pass)){
 	$datosCorrectos=false;
-}
-
-$j1=0;
-if (isset($_POST['j1'])){
-	$j1=strip_tags(trim($_POST['j1']));
 }
 
 if (!$datosCorrectos){
@@ -43,7 +44,6 @@ if (isset($_GET['mensaje'])){
 }
 
 $j1=0;
-	
 if(isset($_GET['j1'])){
 	$j1=strip_tags($_GET['j1']);
 }
@@ -53,8 +53,7 @@ if (isset($_GET['j1Correcto'])){
 	$j1Correcto=strip_tags($_GET['j1Correcto']);
 }
 
-$j2=0;
-	
+$j2=0;	
 if(isset($_GET['j2'])){
 	$j2=strip_tags($_GET['j2']);
 }
@@ -64,8 +63,7 @@ if (isset($_GET['j2Correcto'])){
 	$j2Correcto=strip_tags($_GET['j2Correcto']);
 }
 
-$j3=0;
-	
+$j3=0;	
 if(isset($_GET['j3'])){
 	$j3=strip_tags($_GET['j3']);
 }
@@ -75,8 +73,7 @@ if (isset($_GET['j3Correcto'])){
 	$j3Correcto=strip_tags($_GET['j3Correcto']);
 }
 
-$j4=0;
-	
+$j4=0;	
 if(isset($_GET['j4'])){
 	$j4=strip_tags($_GET['j4']);
 }
@@ -86,8 +83,7 @@ if (isset($_GET['j4Correcto'])){
 	$j4Correcto=strip_tags($_GET['j4Correcto']);
 }
 
-$j5=0;
-	
+$j5=0;	
 if(isset($_GET['j5'])){
 	$j5=strip_tags($_GET['j5']);
 }
@@ -97,8 +93,7 @@ if (isset($_GET['j5Correcto'])){
 	$j5Correcto=strip_tags($_GET['j5Correcto']);
 }
 
-$j6=0;
-	
+$j6=0;	
 if(isset($_GET['j6'])){
 	$j6=strip_tags($_GET['j6']);
 }
@@ -108,8 +103,7 @@ if (isset($_GET['j6Correcto'])){
 	$j6Correcto=strip_tags($_GET['j6Correcto']);
 }
 
-$j7=0;
-	
+$j7=0;	
 if(isset($_GET['j7'])){
 	$j7=strip_tags($_GET['j7']);
 }
@@ -119,8 +113,7 @@ if (isset($_GET['j7Correcto'])){
 	$j7Correcto=strip_tags($_GET['j7Correcto']);
 }
 
-$j8=0;
-	
+$j8=0;	
 if(isset($_GET['j8'])){
 	$j8=strip_tags($_GET['j8']);
 }
@@ -130,8 +123,7 @@ if (isset($_GET['j8Correcto'])){
 	$j8Correcto=strip_tags($_GET['j8Correcto']);
 }
 
-$j9=0;
-	
+$j9=0;	
 if(isset($_GET['j9'])){
 	$j9=strip_tags($_GET['j9']);
 }
@@ -141,8 +133,7 @@ if (isset($_GET['j9Correcto'])){
 	$j9Correcto=strip_tags($_GET['j9Correcto']);
 }
 
-$j10=0;
-	
+$j10=0;	
 if(isset($_GET['j10'])){
 	$j10=strip_tags($_GET['j10']);
 }
@@ -205,6 +196,11 @@ if (isset($_GET['j10Correcto'])){
 				exit;
 			}
 			mysqli_stmt_close($consulta);
+			
+			//FUNCION PARA CALCULAR PRECIOS
+			function consultaPrecio($id){
+			}
+			
 			mysqli_close($canal);
 			
 			?>
@@ -213,65 +209,75 @@ if (isset($_GET['j10Correcto'])){
 		</div>
     </header>
     <main>
-        <div class="blanco">
-			<?=$mensaje?>
+        <div id="blanco1">
 		</div>
         <form id="folleto" action="factura.php?usuario=<?=$usuario?>&pass=<?=$pass?>" method="post">
+			<p class="mensajeerror"><?=$mensaje?></p>
             <div class="prod">
                 <img src="imagenes/black.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j6"><?=erroneo($j6Correcto)?>
+				<input type="number" class="cantidad" min="0" value="<?=$j6?>" name="j6"><span class="mensajeerror"><?=erroneo($j6Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/darkest.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j7"><?=erroneo($j7Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j7?>" name="j7"><span class="mensajeerror"><?=erroneo($j7Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/death.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j3"><?=erroneo($j3Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j3?>" name="j3"><span class="mensajeerror"><?=erroneo($j3Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/dont.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j1"><?=erroneo($j1Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j1?>" name="j1"><span class="mensajeerror"><?=erroneo($j1Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/halo.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j5"><?=erroneo($j5Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j5?>" name="j5"><span class="mensajeerror"><?=erroneo($j5Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/life.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j8"><?=erroneo($j8Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j8?>" name="j8"><span class="mensajeerror"><?=erroneo($j8Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/planet.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j10"><?=erroneo($j10Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j10?>" name="j10"><span class="mensajeerror"><?=erroneo($j10Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/pokemon.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j4"><?=erroneo($j4Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j4?>" name="j4"><span class="mensajeerror"><?=erroneo($j4Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/war.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j9"><?=erroneo($j9Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j9?>" name="j9"><span class="mensajeerror"><?=erroneo($j9Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/witcher.jpg" class="imagen">
+				<div class="precio"></div>
 				<div class="etiqueta">Cantidad: </div>
-                <input type="number" class="cantidad" min="0" value="0" name="j2"><?=erroneo($j2Correcto)?>
+                <input type="number" class="cantidad" min="0" value="<?=$j2?>" name="j2"><span class="mensajeerror"><?=erroneo($j2Correcto)?></span>
             </div>
             <div>
                 <input type="submit" value="Comprar" id="comprar" />
             </div>
         </form>
-        <div class="blanco"></div>
+        <div id="blanco2"></div>
     </main>
     <footer>
         <p>Daniel Crespo Martínez</p>

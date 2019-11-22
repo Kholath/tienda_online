@@ -79,7 +79,7 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
             <p>Lo último en el mundo de los videojuegos</p>
         </div>
 		<div id="bienvenida">
-			¡Bienvenido de nuevo <?=$usuario?><?=$pass?>!
+			¡Bienvenido de nuevo <?=$usuario?>!
 		</div>
     </header>
 	<main>
@@ -99,6 +99,7 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 			
 			//Consulta producto
 			$resultado=0;
+			$cantidades=array();
 			for($i=1;$i<=10;$i++){
 				$sql="select cantidad, precio from productos where id=?";
 				$consulta=mysqli_prepare($canal,$sql);
@@ -117,25 +118,32 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 				mysqli_stmt_fetch($consulta);
 				
 				if($todo[$i-1]>$cantidad){
-					$http="Location: inicio.php?mensaje=".urlencode("Productos fuera de stock");
-					$http.="&j".urlencode($i)."=".urlencode($cantidad);
-					$http.="&usuario=".urlencode($usuario)."&pass=".urlencode($pass);
-					$todoCorrecto[i-1]="f";
-					header($http);
-					exit;
+					$todoCorrecto[$i-1]="f";
+					$cantidades[$i-1]=$cantidad;
 				}else{
 					$individual=$todo[$i-1]*$precio;
 					$resultado+=$individual;
 					if($todo[$i-1]>0){
-						echo "Producto ".$i.": ".$todo[$i-1]." x ".$precio." = ".$individual."<br>";
+						echo "Producto ".$i.": ".$todo[$i-1]." x ".$precio." = ".$individual."€<br>";
 					}
+					$cantidades[$i-1]=$todo[$i-1];
 				}
 				
 				mysqli_stmt_free_result($consulta);
 				unset($consulta);
 				
 			}
-			echo "El coste total de la compra es: ".$resultado."€.";
+			if(in_array("f",$todoCorrecto)){
+				$http="Location: catalogo.php?mensaje=".urlencode("Productos fuera de stock (marcados con *). Seleccionada cantidad máxima.");
+				$http.="&usuario=".urlencode($usuario)."&pass=".urlencode($pass);
+				for($x=1;$x<=10;$x++){
+					$http.="&j".urlencode($x)."=".urlencode($cantidades[$x-1]);
+					$http.="&j".urlencode($x)."Correcto=".urlencode($todoCorrecto[$x-1]);					
+				}
+				header($http);
+				exit;
+			}
+			echo "El coste total de la compra es: ".$resultado."€ (I.V.A. incluido).";
 			?>
 		</div>
 		<div id="blanco2"></div>

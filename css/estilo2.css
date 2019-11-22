@@ -55,9 +55,19 @@ footer{
     grid-area: folleto;
 }
 
+.mensajeerror{
+	color: red;
+	grid-area: error;
+	margin: auto;
+}
+
+.precio{
+	grid-area: precio;
+}
+
 .prod{
     display: grid;
-    grid-template-areas: 'imagen etiqueta cantidad';
+    grid-template-areas: 'imagen precio etiqueta cantidad error';
 }
 
 .imagen{
@@ -86,5 +96,6 @@ footer{
     border: 2px solid white;
     font-size: 1.5em;
     font-family: "Comic Sans";
+	margin-bottom: 10px;
 }
 
