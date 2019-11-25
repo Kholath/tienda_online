@@ -101,7 +101,7 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 			$resultado=0;
 			$cantidades=array();
 			for($i=1;$i<=10;$i++){
-				$sql="select cantidad, precio from productos where id=?";
+				$sql="select cantidad, precio, descripcion from productos where id=?";
 				$consulta=mysqli_prepare($canal,$sql);
 			
 				if (!$consulta){
@@ -112,7 +112,7 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 				mysqli_stmt_bind_param($consulta,"i",$juego);
 				$juego = $i;
 				mysqli_stmt_execute($consulta);
-				mysqli_stmt_bind_result($consulta,$cantidad,$precio);
+				mysqli_stmt_bind_result($consulta,$cantidad,$precio,$descripcion);
 				mysqli_stmt_store_result($consulta);
 				
 				mysqli_stmt_fetch($consulta);
@@ -124,7 +124,7 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 					$individual=$todo[$i-1]*$precio;
 					$resultado+=$individual;
 					if($todo[$i-1]>0){
-						echo "Producto ".$i.": ".$todo[$i-1]." x ".$precio." = ".$individual."€<br>";
+						echo "Producto ".$i." - ".$descripcion." / ".$todo[$i-1]." x ".$precio." = ".$individual."€<br>";
 					}
 					$cantidades[$i-1]=$todo[$i-1];
 				}
@@ -145,6 +145,9 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 			}
 			echo "El coste total de la compra es: ".$resultado."€ (I.V.A. incluido).";
 			?>
+			<br>
+			<button type="button" id="volver">Volver</button>
+			<button type="button" id="comprar">Finalizar compra</button>
 		</div>
 		<div id="blanco2"></div>
     </main>

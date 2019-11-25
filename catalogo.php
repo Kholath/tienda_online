@@ -195,10 +195,34 @@ if (isset($_GET['j10Correcto'])){
 				header("Location:inicio.php?mensaje=".urlencode("Login incorrecto."));
 				exit;
 			}
+			
 			mysqli_stmt_close($consulta);
 			
 			//FUNCION PARA CALCULAR PRECIOS
 			function consultaPrecio($id){
+				$canal=@mysqli_connect(IP,USUARIO,CLAVE,BD);
+				if (!$canal){
+					echo "Ha ocurrido el error: ".mysqli_connect_errno()." ".mysqli_connect_error()."<br />";
+					exit;
+				}
+				mysqli_set_charset($canal,"utf8");
+				$sql="select precio from productos where id=?";
+				$consulta=mysqli_prepare($canal,$sql);
+			
+				if (!$consulta){
+					echo "Ha ocurrido el error: ".mysqli_errno($canal)." ".mysqli_error($canal)."<br />";
+					exit;
+				}
+				mysqli_stmt_bind_param($consulta,"i",$idProducto);
+				$idProducto=$id;
+				
+				mysqli_stmt_execute($consulta);
+				mysqli_stmt_bind_result($consulta,$precio);
+				mysqli_stmt_fetch($consulta);
+				return $precio;
+				mysqli_stmt_free_result($consulta);
+				unset($consulta);
+				
 			}
 			
 			mysqli_close($canal);
@@ -215,61 +239,101 @@ if (isset($_GET['j10Correcto'])){
 			<p class="mensajeerror"><?=$mensaje?></p>
             <div class="prod">
                 <img src="imagenes/black.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(6)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
 				<input type="number" class="cantidad" min="0" value="<?=$j6?>" name="j6"><span class="mensajeerror"><?=erroneo($j6Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/darkest.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(7)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j7?>" name="j7"><span class="mensajeerror"><?=erroneo($j7Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/death.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(3)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j3?>" name="j3"><span class="mensajeerror"><?=erroneo($j3Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/dont.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(1)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j1?>" name="j1"><span class="mensajeerror"><?=erroneo($j1Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/halo.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(5)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j5?>" name="j5"><span class="mensajeerror"><?=erroneo($j5Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/life.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(8)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j8?>" name="j8"><span class="mensajeerror"><?=erroneo($j8Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/planet.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(10)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j10?>" name="j10"><span class="mensajeerror"><?=erroneo($j10Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/pokemon.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(4)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j4?>" name="j4"><span class="mensajeerror"><?=erroneo($j4Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/war.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(9)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j9?>" name="j9"><span class="mensajeerror"><?=erroneo($j9Correcto)?></span>
             </div>
             <div class="prod">
                 <img src="imagenes/witcher.jpg" class="imagen">
-				<div class="precio"></div>
+				<div class="precio">
+					<?php
+						echo consultaPrecio(2)."€";
+					?>
+				</div>
 				<div class="etiqueta">Cantidad: </div>
                 <input type="number" class="cantidad" min="0" value="<?=$j2?>" name="j2"><span class="mensajeerror"><?=erroneo($j2Correcto)?></span>
             </div>

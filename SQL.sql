@@ -24,18 +24,19 @@ insert into Cliente (usuario, password) values ('fkarolowski9', 'oB3FDA');
 create table Productos (
 	id INT PRIMARY KEY,
 	cantidad INT,
-	precio DECIMAL(4,2)
+	precio DECIMAL(4,2),
+	descripcion VARCHAR(50)
 );
-insert into Productos (id, cantidad, precio) values (1, 5, 68.12);
-insert into Productos (id, cantidad, precio) values (2, 3, 50.94);
-insert into Productos (id, cantidad, precio) values (3, 4, 7.45);
-insert into Productos (id, cantidad, precio) values (4, 15, 57.99);
-insert into Productos (id, cantidad, precio) values (5, 10, 16.83);
-insert into Productos (id, cantidad, precio) values (6, 2, 40.78);
-insert into Productos (id, cantidad, precio) values (7, 5, 60.67);
-insert into Productos (id, cantidad, precio) values (8, 1, 56.84);
-insert into Productos (id, cantidad, precio) values (9, 3, 61.41);
-insert into Productos (id, cantidad, precio) values (10, 9, 19.95);
+insert into Productos (id, cantidad, precio, descripcion) values (1, 5, 8.19, 'Dont Starve.');
+insert into Productos (id, cantidad, precio, descripcion) values (2, 3, 29.99, 'The Witcher 3: Wild Hunt.');
+insert into Productos (id, cantidad, precio, descripcion) values (3, 4, 59.99, 'Death Stranding.');
+insert into Productos (id, cantidad, precio, descripcion) values (4, 15, 49.90, 'Pokémon Espada/Escudo.');
+insert into Productos (id, cantidad, precio, descripcion) values (5, 10, 39.90, 'Halo: The Master Chief collection.');
+insert into Productos (id, cantidad, precio, descripcion) values (6, 2, 9.99, 'Black Desert Online: Remastered.');
+insert into Productos (id, cantidad, precio, descripcion) values (7, 5, 22.99, 'Darkest Dungeon.');
+insert into Productos (id, cantidad, precio, descripcion) values (8, 1, 19.99, 'Life is Strange.');
+insert into Productos (id, cantidad, precio, descripcion) values (9, 3, 18.99, 'This War of Mine.');
+insert into Productos (id, cantidad, precio, descripcion) values (10, 9, 44.99, 'Planet Zoo.');
 
 --Creación tabla pedido
 CREATE TABLE pedido(
