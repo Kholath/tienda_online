@@ -1,4 +1,5 @@
 <?php
+//Comprobaciones en caso de introducir datos incorrectos con llamada a la página inicial.
 $datosCorrectos = true;
 
 $usuario="";
@@ -30,7 +31,7 @@ if (!$datosCorrectos){
 	exit;
 }
 
-
+//Función que indica si un dato es incorrecto para marcarlo con un asterisco.
 function erroneo($datoCorrecto){
 	if ($datoCorrecto=="f"){
 		return "*";
@@ -38,6 +39,7 @@ function erroneo($datoCorrecto){
 	return "";
 }
 
+//Recepción de datos desde la factura en caso de que no haya stock de algún producto y mostrar el máximo disponible o dejarlo como el usuario quería en caso de que haya stock.
 $mensaje="";
 if (isset($_GET['mensaje'])){
 	$mensaje=strip_tags($_GET['mensaje']);
@@ -164,7 +166,7 @@ if (isset($_GET['j10Correcto'])){
         </div>
 		<div id="bienvenida">
 			<?php
-			
+			//Consulta para comprobar el login.
 			include "./seguridad/datosBD.php";
 			$canal=@mysqli_connect(IP,USUARIO,CLAVE,BD);
 			if (!$canal){
@@ -235,6 +237,7 @@ if (isset($_GET['j10Correcto'])){
     <main>
         <div id="blanco1">
 		</div>
+		<!-- Se pasan usuario y contraseña a la factura -->
         <form id="folleto" action="factura.php?usuario=<?=$usuario?>&pass=<?=$pass?>" method="post">
 			<p class="mensajeerror"><?=$mensaje?></p>
             <div class="prod">

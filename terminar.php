@@ -1,4 +1,6 @@
 <?php
+
+//Recibo de datos desde la factura.
 $usuario = $_GET['usuario'];
 $j1 = $_GET['j1'];
 $j2 = $_GET['j2'];
@@ -22,6 +24,7 @@ if (!$canal){
 }
 mysqli_set_charset($canal,"utf8");
 
+//Consulta para comprobar el próximo id del pedido a insertar en la tabla.
 $sql="select max(id) from pedido";
 $consulta=mysqli_prepare($canal,$sql);
 
@@ -31,17 +34,21 @@ if (!$consulta){
 }
 
 mysqli_stmt_execute($consulta);
-mysqli_stmt_bind_result($consulta,$pedido);
-if($pedido==null){
-	$pedido=1;
+mysqli_stmt_bind_result($consulta,$numPedido);
+mysqli_stmt_store_result($consulta);
+				
+mysqli_stmt_fetch($consulta);
+if($numPedido===null){
+	$numPedido=1;
 }else{
-	$pedido+=1;
+	$numPedido=$numPedido+1;
 }
 
 mysqli_stmt_free_result($consulta);
 unset($consulta);
 
-$sql="insert into pedido (id,usuario,precio) values (?,?,?)";
+//Inserción en la tabla de pedidos.
+$sql="insert into pedido (id,usuario,total) values (?,?,?)";
 $consulta=mysqli_prepare($canal,$sql);
 
 if (!$consulta){
@@ -51,14 +58,65 @@ if (!$consulta){
 
 mysqli_stmt_bind_param($consulta,"dsd",$idPedido,$user,$total);
 
-$idPedido=$pedido;
+$idPedido=$numPedido;
 $user=$usuario;
 $total=$resultado;
 
 mysqli_stmt_execute($consulta);
+mysqli_stmt_store_result($consulta);
+				
+mysqli_stmt_fetch($consulta);
 
 mysqli_stmt_free_result($consulta);
 unset($consulta);
+
+//Inserción en la tabla contiene de los productos del pedido y modificación del stock.
+for($i=0; $i<sizeof($todo); $i++){
+	if($todo[$i]>0){
+		$sql="insert into contiene (idProducto,idPedido,cantidad) values (?,?,?)";
+		$consulta=mysqli_prepare($canal,$sql);
+
+		if (!$consulta){
+			echo "Ha ocurrido el error: ".mysqli_errno($canal)." ".mysqli_error($canal)."<br />";
+			exit;
+		}
+		
+		mysqli_stmt_bind_param($consulta,"ddd",$idProd,$idPed,$cantidad);
+
+		$idProd=$i+1;
+		$idPed=$numPedido;
+		$cantidad=$todo[$i];
+
+		mysqli_stmt_execute($consulta);
+		mysqli_stmt_store_result($consulta);
+				
+		mysqli_stmt_fetch($consulta);
+
+		mysqli_stmt_free_result($consulta);
+		unset($consulta);
+		
+		$sql="update productos set cantidad=cantidad-? where id=?";
+		$consulta=mysqli_prepare($canal,$sql);
+
+		if (!$consulta){
+			echo "Ha ocurrido el error: ".mysqli_errno($canal)." ".mysqli_error($canal)."<br />";
+			exit;
+		}
+		
+		mysqli_stmt_bind_param($consulta,"dd",$cant,$idPro);
+
+		$idPro=$i+1;
+		$cant=$todo[$i];
+
+		mysqli_stmt_execute($consulta);
+		mysqli_stmt_store_result($consulta);
+				
+		mysqli_stmt_fetch($consulta);
+
+		mysqli_stmt_free_result($consulta);
+		unset($consulta);
+	}
+}
 
 ?>
 

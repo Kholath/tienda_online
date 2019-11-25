@@ -1,5 +1,6 @@
 <?php
 
+//Recepción de datos desde el catálogo.
 $usuario = $_GET['usuario'];
 $pass = $_GET['pass'];
 
@@ -56,6 +57,11 @@ if (isset($_POST['j10'])){
 	$j10=strip_tags(trim($_POST['j10']));
 }
 
+//Creación de arrays con datos.
+/* 	- $todo contiene las cantidades introducidas por el usuario.
+	- $todoCorrecto contiene "v" o "f", según la cantidad del usuario esté en stock o no, respectivamente.
+	- $cantidades contiene los valores definitivos: la mínima entre el stock disponible y lo introducido por el usuario.
+	- $resultado almacena el coste total de la factura.*/
 $todo=array($j1,$j2,$j3,$j4,$j5,$j6,$j7,$j8,$j9,$j10);
 $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,$j6Correcto,$j7Correcto,$j8Correcto,$j9Correcto,$j10Correcto);
 $cantidades=array();
@@ -99,7 +105,7 @@ $resultado=0;
 			}
 			mysqli_set_charset($canal,"utf8");
 			
-			//Consulta producto
+			//Consulta producto y comprobación de stock.
 			for($i=1;$i<=10;$i++){
 				$sql="select cantidad, precio, descripcion from productos where id=?";
 				$consulta=mysqli_prepare($canal,$sql);
@@ -133,6 +139,8 @@ $resultado=0;
 				unset($consulta);
 				
 			}
+			
+			//En caso de que algún producto no tenga tanto stock como el solicitado, se vuelve al catálogo indicando el máximo para ese producto.
 			if(in_array("f",$todoCorrecto)){
 				$http="Location: catalogo.php?mensaje=".urlencode("Productos fuera de stock (marcados con *). Seleccionada cantidad máxima.");
 				$http.="&usuario=".urlencode($usuario)."&pass=".urlencode($pass);
@@ -148,7 +156,7 @@ $resultado=0;
 			<br>
 			
 			<form action="terminar.php?j1=<?=$cantidades[0]?>&j2=<?=$cantidades[1]?>&j3=<?=$cantidades[2]?>&j4=<?=$cantidades[3]?>&j5=<?=$cantidades[4]?>&j6=<?=$cantidades[5]?>&j7=<?=$cantidades[6]?>&j8=<?=$cantidades[7]?>&j9=<?=$cantidades[8]?>&j10=<?=$cantidades[9]?>&usuario=<?=$usuario?>&resultado=<?=$resultado?>" method="post">
-				<button type="button" id="volver"><a href="inicio.php">Volver</a></button>
+				<button type="button" id="volver"><a href="inicio.php">Inicio</a></button>
 				<input type="submit" id="comprar" value="Finalizar compra">
 			</form>
 		</div>

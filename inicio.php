@@ -1,5 +1,5 @@
 <?php
-
+//Código para recibir variables en caso de introducir datos incorrectos. 
 $mensaje="";
 if (isset($_GET['mensaje'])){
 	$mensaje=strip_tags($_GET['mensaje']);
