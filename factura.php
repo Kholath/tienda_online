@@ -58,6 +58,8 @@ if (isset($_POST['j10'])){
 
 $todo=array($j1,$j2,$j3,$j4,$j5,$j6,$j7,$j8,$j9,$j10);
 $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,$j6Correcto,$j7Correcto,$j8Correcto,$j9Correcto,$j10Correcto);
+$cantidades=array();
+$resultado=0;
 
 ?>
 
@@ -98,8 +100,6 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 			mysqli_set_charset($canal,"utf8");
 			
 			//Consulta producto
-			$resultado=0;
-			$cantidades=array();
 			for($i=1;$i<=10;$i++){
 				$sql="select cantidad, precio, descripcion from productos where id=?";
 				$consulta=mysqli_prepare($canal,$sql);
@@ -146,8 +146,11 @@ $todoCorrecto=array($j1Correcto,$j2Correcto,$j3Correcto,$j4Correcto,$j5Correcto,
 			echo "El coste total de la compra es: ".$resultado."€ (I.V.A. incluido).";
 			?>
 			<br>
-			<button type="button" id="volver">Volver</button>
-			<button type="button" id="comprar">Finalizar compra</button>
+			
+			<form action="terminar.php?j1=<?=$cantidades[0]?>&j2=<?=$cantidades[1]?>&j3=<?=$cantidades[2]?>&j4=<?=$cantidades[3]?>&j5=<?=$cantidades[4]?>&j6=<?=$cantidades[5]?>&j7=<?=$cantidades[6]?>&j8=<?=$cantidades[7]?>&j9=<?=$cantidades[8]?>&j10=<?=$cantidades[9]?>&usuario=<?=$usuario?>&resultado=<?=$resultado?>" method="post">
+				<button type="button" id="volver"><a href="inicio.php">Volver</a></button>
+				<input type="submit" id="comprar" value="Finalizar compra">
+			</form>
 		</div>
 		<div id="blanco2"></div>
     </main>

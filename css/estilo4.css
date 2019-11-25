@@ -35,7 +35,7 @@ main{
     text-align: center;
     margin: 0px;
     display: grid;
-    grid-template-areas: 'blanco1 factura blanco2';
+    grid-template-areas: 'blanco1 fin blanco2';
 }
 
 #blanco1{
@@ -48,35 +48,12 @@ main{
 	background-color: gray;
 }
 
-#factura{
-	grid-area: factura;
+#fin{
+	grid-area: fin;
 	background-color: orange;
 	border: 2px dotted black;
-}
-
-#comprar{
-    background-color: green;
-    color: black;
-    border-radius: 15px;
-    border: 2px solid white;
-    font-size: 1.5em;
-    font-family: "Comic Sans";
-	margin-bottom: 10px;
-}
-
-#volver{
-    background-color: red;
-    color: white;
-    border-radius: 15px;
-    border: 2px solid white;
-    font-size: 1.5em;
-    font-family: "Comic Sans";
-	margin-bottom: 10px;
-}
-
-#volver a{
-	text-decoration: none;
-	color: white;
+	font-family: Arial;
+	text-align: center;
 }
 
 footer{
